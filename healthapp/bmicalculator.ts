@@ -1,3 +1,5 @@
+export {};
+
 interface BMIValues {
   height: number;
   bodymass: number;
