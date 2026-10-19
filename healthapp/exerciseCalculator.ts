@@ -1,5 +1,3 @@
-export {};
-
 interface Result { 
   periodLength: number,
   trainingDays: number,
@@ -36,7 +34,7 @@ const parseArguments = (args: string[]): ExerciseValues => {
   };
 };
 
-const calculateExercises = (dailyHours: number[], target: number): Result => {
+export const calculateExercises = (dailyHours: number[], target: number): Result => {
   const periodLength = dailyHours.length;
   const trainingDays = dailyHours.filter(hours => hours > 0).length;
   const totalHours = dailyHours.reduce((acc, curr) => acc + curr,0);
