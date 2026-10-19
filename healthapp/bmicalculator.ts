@@ -32,16 +32,20 @@ const parseArguments = (args: string[]): BMIValues => {
 
 const calculateBMI = (bodymass: number, height: number) => {
   const bmi: number = bodymass / (height * height)
-  console.log(BMI_CATEGORIES.find(({ limit }) => bmi < limit)?.desc ?? 'Unable to calculate BMI')
+  return (BMI_CATEGORIES.find(({ limit }) => bmi < limit)?.desc ?? 'Unable to calculate BMI')
 };
 
-try {
-  const { height, bodymass } = parseArguments(process.argv);
-  calculateBMI(bodymass, height);
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happened.'
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+if (process.argv[1] === import.meta.filename) {
+  try {
+    const { height, bodymass } = parseArguments(process.argv);
+    console.log(calculateBMI(bodymass, height));
+  } catch (error: unknown) {
+    let errorMessage = 'Something bad happened.'
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
+
+export { calculateBMI };
