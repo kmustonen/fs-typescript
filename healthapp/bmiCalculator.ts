@@ -1,5 +1,3 @@
-export {};
-
 interface BMIValues {
   height: number;
   bodymass: number;
@@ -24,15 +22,15 @@ const parseArguments = (args: string[]): BMIValues => {
     return {
       height: Number(args[2]) / 100,
       bodymass: Number(args[3])
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
-const calculateBMI = (bodymass: number, height: number) => {
-  const bmi: number = bodymass / (height * height)
-  return (BMI_CATEGORIES.find(({ limit }) => bmi < limit)?.desc ?? 'Unable to calculate BMI')
+export const calculateBMI = (bodymass: number, height: number): string => {
+  const bmi: number = bodymass / (height * height);
+  return (BMI_CATEGORIES.find(({ limit }) => bmi < limit)?.desc ?? 'Unable to calculate BMI');
 };
 
 if (process.argv[1] === import.meta.filename) {
@@ -40,12 +38,10 @@ if (process.argv[1] === import.meta.filename) {
     const { height, bodymass } = parseArguments(process.argv);
     console.log(calculateBMI(bodymass, height));
   } catch (error: unknown) {
-    let errorMessage = 'Something bad happened.'
+    let errorMessage = 'Something bad happened.';
     if (error instanceof Error) {
       errorMessage += ' Error: ' + error.message;
     }
     console.log(errorMessage);
   }
 }
-
-export { calculateBMI };

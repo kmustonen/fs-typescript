@@ -15,7 +15,7 @@ app.get('/bmi', (req, res) => {
     return res.status(400).send({ error: 'malformatted parameters' });
   }
 
-  return res.send({height, weight, bmi: calculateBMI(weight, height / 100)})
+  return res.send({height, weight, bmi: calculateBMI(weight, height / 100)});
 });
 
 const PORT = 3003;
